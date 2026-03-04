@@ -1,6 +1,7 @@
 package cartas.framework.motor;
 
 import cartas.framework.modelo.*;
+import cartas.framework.observer.ObserverJogo;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +41,8 @@ public abstract class Partida<TipoCarta extends Carta> {
                 jogador.receberCarta(baralho.comprarCarta());
             }
         }
+        notificarInicio();
+        notificarMudancaVez(obterJogadorDaVez());
     }
 
     public Jogador<TipoCarta> obterJogadorDaVez() {
@@ -56,7 +59,13 @@ public abstract class Partida<TipoCarta extends Carta> {
         if (regras.ehJogadaValida(carta, verMesa())) { 
             this.mesa.add(carta); 
             jogador.verMao().removerCarta(carta);
+
+            notificarJogada(jogador, carta);
+
             gerenciadorDeTurnos.avancar();
+
+            notificarMudancaVez(obterJogadorDaVez());
+            
             return true;
         }
         return false;
@@ -68,5 +77,25 @@ public abstract class Partida<TipoCarta extends Carta> {
 
     public void limparMesa() {
         this.mesa.clear();
+    }
+
+    // Lista de observadores
+    private List<ObserverJogo> observadores = new ArrayList<>();
+
+    public void registrarObservador(ObserverJogo observador) {
+        this.observadores.add(observador);
+    }
+
+    // Métodos auxiliares de aviso observer
+    private void notificarInicio() {
+        for (ObserverJogo o : observadores) o.aoIniciarPartida();
+    }
+
+    private void notificarJogada(Jogador<TipoCarta> j, TipoCarta c) {
+        for (ObserverJogo o : observadores) o.aoJogarCarta(j, c);
+    }
+
+    private void notificarMudancaVez(Jogador<TipoCarta> j) {
+        for (ObserverJogo o : observadores) o.aoMudarVez(j);
     }
 }

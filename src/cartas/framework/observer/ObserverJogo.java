@@ -3,8 +3,8 @@ package cartas.framework.observer;
 import cartas.framework.modelo.Carta;
 import cartas.framework.modelo.Jogador;
 
-// Interface que a Interface Gráfica deve implementar para ser avisada sobre os acontecimentos do jogo
-public interface ObservadorJogo {
+// Interface que a Interface Grafica deve implementar para ser avisada sobre os acontecimentos do jogo
+public interface ObserverJogo {
     
     // Avisa que a partida começou 
     void aoIniciarPartida();
