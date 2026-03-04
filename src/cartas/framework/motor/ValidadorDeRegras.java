@@ -8,7 +8,7 @@ import java.util.List;
 public interface ValidadorDeRegras<TipoCarta extends Carta> {
     
     // Valida se e uma jogada permitida dependendo da regra do jogo
-    boolean ehJogadaValida(TipoCarta cartaParaJogar, TipoCarta cartaNaMesa);
+    boolean ehJogadaValida(TipoCarta cartaParaJogar, List<TipoCarta> cartasNaMesa);
 
     // Define quem ganhou a partida ou rodada
     boolean verificarVencedor(List<Jogador<TipoCarta>> jogadores);
