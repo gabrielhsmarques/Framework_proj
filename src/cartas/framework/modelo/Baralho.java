@@ -5,19 +5,17 @@ import java.util.Collections;
 import java.util.List;
 
 
-// Classe abstrata que define o comportamento de qualquer baralho.
-
+// Classe abstrata que define o comportamento de qualquer baralho
 public abstract class Baralho<TipoDeCarta extends Carta> {
 
     protected List<TipoDeCarta> listaDeCartas = new ArrayList<>();
 
-    //Metodo que o jogo especifico vai implementar ao criar o baralho
+    // Metodo que o jogo vai implementar ao criar o baralho
     public Baralho() {
         
         inicializar();
     }
 
-    //metodo abstrato pois o framework nao sabe quais cartas o jogo tem 
     public abstract void inicializar();
 
     public void adicionarCarta(TipoDeCarta carta) {
