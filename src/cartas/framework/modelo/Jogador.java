@@ -6,21 +6,34 @@ public class Jogador<TipoDeCarta extends Carta> {
     
     private String nome;
     private Mao<TipoDeCarta> mao;
+    private Pontuacao pontuacao;
 
     public Jogador(String nome) {
         this.nome = nome;
         this.mao = new Mao<>(); //comeca com a mao vazia
     }
 
+    public void setPontuacao(Pontuacao p){
+        pontuacao = p;
+    }
+
+    public void adicionarPontos(int pontos){
+        pontuacao.adicionar(pontos);
+    }
+
+    public int obterPontos(){
+        return pontuacao.getValor();
+    }
+
     public void receberCarta(TipoDeCarta carta) {
-        this.mao.adicionarCarta(carta);
+        mao.adicionarCarta(carta);
     }
 
     public String obterNome() {
-        return this.nome;
+        return nome;
     }
 
     public Mao<TipoDeCarta> verMao() {
-        return this.mao;
+        return mao;
     }
 }

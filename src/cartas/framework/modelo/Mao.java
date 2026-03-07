@@ -10,23 +10,23 @@ public class Mao<TipoDeCarta extends Carta> {
 
     public void adicionarCarta(TipoDeCarta carta) {
         if (carta != null) {
-            this.listaDeCartas.add(carta);
+            listaDeCartas.add(carta);
         }
     }
 
     public boolean removerCarta(TipoDeCarta carta) {
-        return this.listaDeCartas.remove(carta);
+        return listaDeCartas.remove(carta);
     }
 
     public void limparMao() {
-        this.listaDeCartas.clear();
+        listaDeCartas.clear();
     }
 
     public int obterQuantidadeDeCartas() {
-        return this.listaDeCartas.size();
+        return listaDeCartas.size();
     }
 
     public List<TipoDeCarta> obterCartas() {
-        return this.listaDeCartas;
+        return listaDeCartas;
     }
 }

@@ -12,23 +12,22 @@ public abstract class Baralho<TipoDeCarta extends Carta> {
 
     // Metodo que o jogo vai implementar ao criar o baralho
     public Baralho() {
-        
         inicializar();
     }
 
     public abstract void inicializar();
 
     public void adicionarCarta(TipoDeCarta carta) {
-        this.listaDeCartas.add(carta);
+        listaDeCartas.add(carta);
     }
 
     public void embaralhar() {
-        Collections.shuffle(this.listaDeCartas);
+        Collections.shuffle(listaDeCartas);
     }
 
     public TipoDeCarta comprarCarta() {
-        if (this.listaDeCartas.isEmpty()) return null;
-        return this.listaDeCartas.remove(0);
+        if (listaDeCartas.isEmpty()) return null;
+        return listaDeCartas.remove(0);
     }
 }
     

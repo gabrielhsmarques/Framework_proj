@@ -9,10 +9,12 @@ import java.util.List;
 public abstract class Partida<TipoCarta extends Carta> {
     
     protected Baralho<TipoCarta> baralho;
-    protected List<Jogador<TipoCarta>> jogadores;
+    protected List<Jogador<TipoCarta>> jogadores = new ArrayList<>();
     protected GerenciadorDeTurnos gerenciadorDeTurnos;
+    protected List<Jogador<TipoCarta>> quemJogouNaMesa = new ArrayList<>();
     protected ValidadorDeRegras<TipoCarta> regras;
     protected List<TipoCarta> mesa;
+    protected int indiceQuemComecaAMao = 0;
 
     // O baralho sera inicializado pelo jogo especifico
     public Partida(ValidadorDeRegras<TipoCarta> regras) {
@@ -30,17 +32,21 @@ public abstract class Partida<TipoCarta extends Carta> {
 
     // Embaralhar e dar as cartas
     public void iniciarPartida() {
-        if (jogadores.isEmpty()) return;
 
+        baralho = criarBaralho();
         baralho.embaralhar();
+
         gerenciadorDeTurnos = new GerenciadorDeTurnos(jogadores.size());
+        gerenciadorDeTurnos.definirVez(indiceQuemComecaAMao);
 
         // Distribui as cartas automaticamente usando a regra do jogo
         for (Jogador<TipoCarta> jogador : jogadores) {
+            jogador.verMao().limparMao();
             for (int i = 0; i < regras.quantidadeDeCartasIniciais(); i++) {
                 jogador.receberCarta(baralho.comprarCarta());
             }
         }
+        limparMesa();
         notificarInicio();
         notificarMudancaVez(obterJogadorDaVez());
     }
@@ -57,14 +63,16 @@ public abstract class Partida<TipoCarta extends Carta> {
     // Realiza a jogada. Se a regra permitir, a carta vai para a mesa
     public boolean realizarJogada(Jogador<TipoCarta> jogador, TipoCarta carta) {
         if (regras.ehJogadaValida(carta, verMesa())) { 
-            this.mesa.add(carta); 
+            mesa.add(carta);
+            quemJogouNaMesa.add(jogador);
             jogador.verMao().removerCarta(carta);
 
             notificarJogada(jogador, carta);
 
-            gerenciadorDeTurnos.avancar();
-
-            notificarMudancaVez(obterJogadorDaVez());
+            if (this.mesa.size() < jogadores.size()) {
+                gerenciadorDeTurnos.avancar();
+                notificarMudancaVez(obterJogadorDaVez());
+            }
             
             return true;
         }
@@ -76,26 +84,36 @@ public abstract class Partida<TipoCarta extends Carta> {
     }
 
     public void limparMesa() {
-        this.mesa.clear();
+        mesa.clear();
+        quemJogouNaMesa.clear();
+        for (ObserverJogo obs : observadores) {
+            obs.aoLimparMesa();
+        }
+    }
+
+    protected void notificarFinalizacao(Jogador<TipoCarta> vencedor) {
+        for (ObserverJogo obs : observadores) {
+            obs.aoFinalizarJogo(vencedor);
+        }
     }
 
     // Lista de observadores
-    private List<ObserverJogo> observadores = new ArrayList<>();
+    protected List<ObserverJogo> observadores = new ArrayList<>();
 
     public void registrarObservador(ObserverJogo observador) {
         this.observadores.add(observador);
     }
 
     // Métodos auxiliares de aviso observer
-    private void notificarInicio() {
+    protected void notificarInicio() {
         for (ObserverJogo o : observadores) o.aoIniciarPartida();
     }
 
-    private void notificarJogada(Jogador<TipoCarta> j, TipoCarta c) {
+    protected void notificarJogada(Jogador<TipoCarta> j, TipoCarta c) {
         for (ObserverJogo o : observadores) o.aoJogarCarta(j, c);
     }
 
-    private void notificarMudancaVez(Jogador<TipoCarta> j) {
+    protected void notificarMudancaVez(Jogador<TipoCarta> j) {
         for (ObserverJogo o : observadores) o.aoMudarVez(j);
     }
 }

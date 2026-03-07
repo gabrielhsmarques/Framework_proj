@@ -2,6 +2,7 @@ package cartas.truco;
 
 import cartas.framework.modelo.Carta;
 
+// Criacao do modelo de carta do truco
 public class CartaTruco extends Carta{
 
     private String face;
@@ -16,7 +17,7 @@ public class CartaTruco extends Carta{
 
     @Override
     public String obterCarta(){
-        return face + "de" + naipe;
+        return face + " de " + naipe;
     }
 
     public String getFace() {

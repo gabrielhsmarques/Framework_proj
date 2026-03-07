@@ -3,7 +3,7 @@ package cartas.truco;
 import cartas.framework.modelo.Baralho;
 
 public class BaralhoTruco extends Baralho<CartaTruco>{
-
+    // Criacao do baralho de truco
     @Override
     public void inicializar(){
         String[] naipes = {"Paus", "Copas", "Espadas", "Ouros"};

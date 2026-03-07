@@ -1,17 +1,17 @@
 package cartas.truco;
 
-import cartas.framework.observer.ObserverJogo;
 import cartas.framework.modelo.Jogador;
-import cartas.truco.CartaTruco;
+import cartas.framework.observer.ObserverJogo;
 
-/**
- * Esta interface herda tudo do framework e adiciona os eventos do Truco.
- */
+// Interface que herda tudo do framework e adiciona os eventos do truco
 public interface ObserverTruco extends ObserverJogo {
     
-    // Avisa que alguém pediu Truco/Seis/Nove...
+    // Avisa que alguém pediu Truco/Seis/Nove/Doze
     void aoPedirAposta(Jogador<CartaTruco> jogador, int novoValor);
 
-    // Avisa se o adversário aceitou, correu ou aumentou
+    // Avisa se o adversario aceitou, correu ou aumentou
     void aoResponderAposta(Jogador<CartaTruco> jogador, String resposta);
+
+    // Avisa que a equipe em mao de onze deve decidir se vai jogar a mao ou nao
+    void aoPedirDecisaoMaoDeOnze(int equipe, int pontos);
 }

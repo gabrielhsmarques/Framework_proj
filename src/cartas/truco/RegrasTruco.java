@@ -2,7 +2,6 @@ package cartas.truco;
 
 import cartas.framework.modelo.Jogador;
 import cartas.framework.motor.ValidadorDeRegras;
-import cartas.truco.CartaTruco;
 import java.util.List;
 
 public class RegrasTruco implements ValidadorDeRegras<CartaTruco> {
@@ -20,9 +19,17 @@ public class RegrasTruco implements ValidadorDeRegras<CartaTruco> {
 
     @Override
     public boolean verificarVencedor(List<Jogador<CartaTruco>> jogadores) {
-        // Aqui voce verificaria se alguém atingiu 12 pontos.
-        // Por enquanto, vamos deixar simples para você testar.
+        // Verifica se alguma equipe atingiu os pontos para vitoria
+        for(Jogador<CartaTruco> j : jogadores){
+            if(j.obterPontos() >= 12){
+                return true;
+            }
+        }
         return false; 
+    }
+
+    public boolean validarMaoDeOnze(Jogador<CartaTruco> autor) {
+        return autor.obterPontos() < 11;
     }
     
     // Qual das cartas na mesa ganhou a rodada
