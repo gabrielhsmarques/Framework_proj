@@ -1,20 +1,12 @@
 package cartas.uno;
 
-<<<<<<< HEAD
-import cartas.framework.modelo.*;
 import cartas.framework.motor.*;
+import cartas.framework.modelo.*;
 
 public class PartidaUno extends Partida<CartaUno> {
 
     private boolean jaComprouNoTurno = false;
 
-=======
-import cartas.framework.motor.*;
-import cartas.framework.modelo.*;
-
-public class PartidaUno extends Partida<CartaUno> {
-
->>>>>>> b216a4cae0e90cc97f1ebbd6205447731a5846cb
     public PartidaUno() {
         super(new RegrasUno());
     }
@@ -25,7 +17,6 @@ public class PartidaUno extends Partida<CartaUno> {
     }
 
     @Override
-<<<<<<< HEAD
     public void iniciarPartida() {
         // 1. Distribui as cartas iniciais (7 para cada)
         super.iniciarPartida(); 
@@ -53,11 +44,6 @@ public class PartidaUno extends Partida<CartaUno> {
         if (super.realizarJogada(jogador, carta)) {
             processarEfeito(carta);
             jaComprouNoTurno = false; // Reset ao jogar com sucesso
-=======
-    public boolean realizarJogada(Jogador<CartaUno> jogador, CartaUno carta) {
-        if (super.realizarJogada(jogador, carta)) {
-            processarEfeito(carta);
->>>>>>> b216a4cae0e90cc97f1ebbd6205447731a5846cb
             
             if (regras.verificarVencedor(jogadores)) {
                 notificarFinalizacao(jogador);
@@ -67,7 +53,6 @@ public class PartidaUno extends Partida<CartaUno> {
         return false;
     }
 
-<<<<<<< HEAD
     private void processarEfeito(CartaUno carta) {
         switch (carta.getValor()) {
             case PULAR -> gerenciadorDeTurnos.pularVez();
@@ -83,25 +68,6 @@ public class PartidaUno extends Partida<CartaUno> {
             default -> { }
         }
     }
-=======
-private void processarEfeito(CartaUno carta) {
-    switch (carta.getValor()) {
-        case PULAR -> gerenciadorDeTurnos.pularVez();
-        case INVERTER -> gerenciadorDeTurnos.mudarDirecao();
-        case MAIS_DOIS -> {
-            gerenciadorDeTurnos.avancar();
-            comprarParaJogadorAtual(2);
-        }
-        case MAIS_QUATRO -> {
-            gerenciadorDeTurnos.avancar();
-            comprarParaJogadorAtual(4);
-        }
-        default -> { 
-            // Nenhuma ação para ZERO, UM, DOIS, etc.
-        }
-    }
-}
->>>>>>> b216a4cae0e90cc97f1ebbd6205447731a5846cb
 
     public void comprarParaJogadorAtual(int qtd) {
         Jogador<CartaUno> atual = obterJogadorDaVez();
@@ -110,7 +76,6 @@ private void processarEfeito(CartaUno carta) {
         }
     }
 
-<<<<<<< HEAD
     public int jogadorComprarCarta() {
         if (jaComprouNoTurno) return -1; // Bloqueio: já comprou uma vez
 
@@ -142,16 +107,3 @@ private void processarEfeito(CartaUno carta) {
         return false; // Bloqueado: tem que comprar antes de passar
     }
 }
-=======
-    public void jogadorComprarCarta() {
-    Jogador<CartaUno> atual = obterJogadorDaVez();
-    CartaUno comprada = baralho.comprarCarta();
-    
-    if (comprada != null) {
-        atual.receberCarta(comprada);
-        // Notifica a GUI que a mão mudou (você pode usar o observer para isso)
-        notificarMudancaVez(atual); 
-    }
-}
-}
->>>>>>> b216a4cae0e90cc97f1ebbd6205447731a5846cb

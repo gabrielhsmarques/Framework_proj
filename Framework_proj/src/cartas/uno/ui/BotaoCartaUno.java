@@ -14,7 +14,6 @@ public class BotaoCartaUno extends JButton {
         this.carta = carta;
         this.setText(carta.getValor().toString());
         this.setPreferredSize(new Dimension(100, 140));
-<<<<<<< HEAD
         this.setFont(new Font("Arial", Font.BOLD, 20));
         this.setForeground(Color.WHITE);
         
@@ -30,11 +29,6 @@ public class BotaoCartaUno extends JButton {
     
     this.setText(rotulo);
          // ESTA LINHA REMOVE O RETÂNGULO BEGE/FOCO:
-=======
-        this.setFont(new Font("Arial", Font.BOLD, 12));
-
-        // ESTA LINHA REMOVE O RETÂNGULO BEGE/FOCO:
->>>>>>> b216a4cae0e90cc97f1ebbd6205447731a5846cb
         this.setFocusPainted(false);
         
         // --- AJUSTE PARA CORES NO LINUX ---
@@ -48,7 +42,6 @@ public class BotaoCartaUno extends JButton {
         
         // Define a cor baseada na carta
         switch (carta.getCor()) {
-<<<<<<< HEAD
         case VERMELHO -> setBackground(new Color(220, 20, 60));
         case AZUL -> setBackground(new Color(30, 144, 255));
         case VERDE -> setBackground(new Color(34, 139, 34));
@@ -56,15 +49,6 @@ public class BotaoCartaUno extends JButton {
         case ESPECIAL -> setBackground(Color.BLACK);
     }
 }
-=======
-            case VERMELHO -> { setBackground(new Color(255, 0, 0)); setForeground(Color.WHITE); }
-            case AZUL -> { setBackground(new Color(0, 0, 255)); setForeground(Color.WHITE); }
-            case VERDE -> { setBackground(new Color(0, 150, 0)); setForeground(Color.WHITE); }
-            case AMARELO -> { setBackground(new Color(255, 220, 0)); setForeground(Color.BLACK); }
-            case ESPECIAL -> { setBackground(Color.BLACK); setForeground(Color.WHITE); }
-        }
-    }
->>>>>>> b216a4cae0e90cc97f1ebbd6205447731a5846cb
 
     public CartaUno getCarta() { return carta; }
 }

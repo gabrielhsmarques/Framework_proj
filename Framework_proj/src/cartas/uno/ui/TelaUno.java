@@ -15,10 +15,7 @@ public class TelaUno extends JFrame implements ObserverJogo {
     private JPanel painelMao;
     private JLabel labelStatus;
     private JLabel labelTopoMesa;
-<<<<<<< HEAD
     
-=======
->>>>>>> b216a4cae0e90cc97f1ebbd6205447731a5846cb
 
     public TelaUno(PartidaUno partida) {
         this.partida = partida;
@@ -36,10 +33,7 @@ public class TelaUno extends JFrame implements ObserverJogo {
     }
 
     private void inicializarComponentes() {
-<<<<<<< HEAD
 
-=======
->>>>>>> b216a4cae0e90cc97f1ebbd6205447731a5846cb
         JPanel painelTopo = new JPanel();
         labelStatus = new JLabel("Aguardando início...", SwingConstants.CENTER);
         labelStatus.setFont(new Font("Arial", Font.BOLD, 18));
@@ -47,12 +41,8 @@ public class TelaUno extends JFrame implements ObserverJogo {
         add(painelTopo, BorderLayout.NORTH);
 
         painelMesa = new JPanel(new GridBagLayout());
-<<<<<<< HEAD
         painelMesa.setBackground(new Color(45, 45, 45));
 
-=======
-        painelMesa.setBackground(new Color(50, 50, 50));
->>>>>>> b216a4cae0e90cc97f1ebbd6205447731a5846cb
         labelTopoMesa = new JLabel("MESA VAZIA");
         labelTopoMesa.setForeground(Color.WHITE);
         labelTopoMesa.setFont(new Font("Arial", Font.BOLD, 22));
@@ -64,7 +54,6 @@ public class TelaUno extends JFrame implements ObserverJogo {
         JScrollPane scrollMao = new JScrollPane(painelMao);
         scrollMao.setPreferredSize(new Dimension(1000, 180));
         
-<<<<<<< HEAD
         // PAINEL DE BOTÕES DE AÇÃO (Comprar e Passar)
         JPanel painelBotoesAcao = new JPanel(new GridLayout(2, 1, 5, 5));
         
@@ -105,16 +94,6 @@ public class TelaUno extends JFrame implements ObserverJogo {
     }
     
     @SuppressWarnings("unchecked")
-=======
-        JButton btnComprar = new JButton("COMPRAR CARTA");
-        btnComprar.addActionListener(e -> partida.jogadorComprarCarta());
-
-        painelInferior.add(scrollMao, BorderLayout.CENTER);
-        painelInferior.add(btnComprar, BorderLayout.EAST);
-        add(painelInferior, BorderLayout.SOUTH);
-    }
-
->>>>>>> b216a4cae0e90cc97f1ebbd6205447731a5846cb
     @Override
     public void aoMudarVez(Jogador<?> jogadorDaVez) {
         labelStatus.setText("Vez de: " + jogadorDaVez.obterNome());
@@ -122,30 +101,16 @@ public class TelaUno extends JFrame implements ObserverJogo {
 
         for (Object obj : jogadorDaVez.verMao().obterCartas()) {
             CartaUno carta = (CartaUno) obj;
-<<<<<<< HEAD
             BotaoCartaUno btn = new BotaoCartaUno(carta); 
             
             btn.addActionListener(e -> {
-=======
-            BotaoCartaUno btn = new BotaoCartaUno(carta); // Usa as cores corrigidas
-            
-            btn.addActionListener(e -> {
-                // VOLTOU A LÓGICA DE VALIDAÇÃO:
->>>>>>> b216a4cae0e90cc97f1ebbd6205447731a5846cb
                 if (partida.realizarJogada((Jogador<CartaUno>) jogadorDaVez, carta)) {
                     if (carta.getCor() == CartaUno.Cor.ESPECIAL) {
                         solicitarEscolhaDeCor(carta);
                     }
-<<<<<<< HEAD
-                    partida.gerenciadorDeTurnos.avancar(); 
+                    partida.getGerenciadorDeTurnos().avancar(); 
                     aoMudarVez(partida.obterJogadorDaVez());
                 } else {
-=======
-                    partida.getGerenciadorDeTurnos().avancar(); // Avança turno no framework
-                    aoMudarVez(partida.obterJogadorDaVez());
-                } else {
-                    // MENSAGEM DE ERRO RESTAURADA:
->>>>>>> b216a4cae0e90cc97f1ebbd6205447731a5846cb
                     JOptionPane.showMessageDialog(this, 
                         "Jogada Inválida! A carta deve ter a mesma COR ou VALOR do topo.", 
                         "Regras do Uno", JOptionPane.ERROR_MESSAGE);
@@ -157,7 +122,6 @@ public class TelaUno extends JFrame implements ObserverJogo {
         painelMao.repaint();
     }
 
-<<<<<<< HEAD
     @Override 
     public void aoIniciarPartida() {
          labelStatus.setText("Jogo Iniciado!"); 
@@ -168,32 +132,18 @@ public class TelaUno extends JFrame implements ObserverJogo {
 
     @Override 
     public void aoLimparMesa() { labelTopoMesa.setText("MESA LIMPA"); }
-=======
-    @Override public void aoIniciarPartida() { labelStatus.setText("Jogo Iniciado!"); }
-    
-    @Override
-    public void aoJogarCarta(Jogador<?> j, Carta c) {
-        labelTopoMesa.setText("TOPO: " + c.obterCarta());
-        if (c instanceof CartaUno cu) atualizarCorMesa(cu.getCor());
-    }
-
-    @Override public void aoLimparMesa() { labelTopoMesa.setText("MESA LIMPA"); }
->>>>>>> b216a4cae0e90cc97f1ebbd6205447731a5846cb
     
     @Override public void aoFinalizarJogo(Jogador<?> vencedor) {
         JOptionPane.showMessageDialog(this, "UNO! Vencedor: " + vencedor.obterNome());
         System.exit(0);
     }
 
-<<<<<<< HEAD
     @Override
     public void aoJogarCarta(Jogador<?> j, Carta c) { // Verifique se o nome é EXATAMENTE esse
         labelTopoMesa.setText("TOPO: " + c.obterCarta());
         if (c instanceof CartaUno cu) atualizarCorMesa(cu.getCor());
     }
 
-=======
->>>>>>> b216a4cae0e90cc97f1ebbd6205447731a5846cb
     private void solicitarEscolhaDeCor(CartaUno carta) {
         String[] cores = {"VERMELHO", "AZUL", "VERDE", "AMARELO"};
         int escolha = JOptionPane.showOptionDialog(this, "Escolha a nova cor:", "Coringa",
@@ -205,7 +155,6 @@ public class TelaUno extends JFrame implements ObserverJogo {
     }
 
     private void atualizarCorMesa(CartaUno.Cor cor) {
-<<<<<<< HEAD
     switch (cor) {
         case VERMELHO -> painelMesa.setBackground(new Color(180, 0, 0));
         case AZUL -> painelMesa.setBackground(new Color(0, 0, 180));
@@ -215,14 +164,4 @@ public class TelaUno extends JFrame implements ObserverJogo {
         default -> painelMesa.setBackground(new Color(45, 45, 45));
     }
 }
-=======
-        switch (cor) {
-            case VERMELHO -> painelMesa.setBackground(new Color(180, 0, 0));
-            case AZUL -> painelMesa.setBackground(new Color(0, 0, 180));
-            case VERDE -> painelMesa.setBackground(new Color(0, 120, 0));
-            case AMARELO -> painelMesa.setBackground(new Color(200, 200, 0));
-            default -> painelMesa.setBackground(Color.BLACK);
-        }
-    }
->>>>>>> b216a4cae0e90cc97f1ebbd6205447731a5846cb
 }

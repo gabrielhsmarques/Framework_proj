@@ -19,7 +19,6 @@ public class MainUno {
             PartidaUno partida = new PartidaUno();
 
             // 2. Adiciona os jogadores (Exemplo com 4 jogadores)
-<<<<<<< HEAD
             partida.adicionarJogador("Mary");
             partida.adicionarJogador("Gabriel");
             partida.adicionarJogador("Jogador1");
@@ -27,17 +26,6 @@ public class MainUno {
 
             // 3. Cria a Interface Gráfica e passa a partida para ela
             // O registro do Observer já acontece dentro do construtor da TelaUno
-=======
-            partida.adicionarJogador("LordMary");
-            partida.adicionarJogador("Gabriel");
-            partida.adicionarJogador("IA_Bot1");
-            partida.adicionarJogador("IA_Bot2");
-
-            // 3. Cria a Interface Gráfica e passa a partida para ela
-            // O registro do Observer já acontece dentro do construtor da TelaUno
-            // Em vez de: TelaUno gui = new TelaUno(partida);
-            // Use apenas:
->>>>>>> b216a4cae0e90cc97f1ebbd6205447731a5846cb
             new TelaUno(partida);
 
             // 4. Inicia a partida (Baralho é criado, cartas distribuídas e observers notificados)
