@@ -10,7 +10,7 @@ public abstract class Partida<TipoCarta extends Carta> {
     
     protected Baralho<TipoCarta> baralho;
     protected List<Jogador<TipoCarta>> jogadores = new ArrayList<>();
-    protected GerenciadorDeTurnos gerenciadorDeTurnos;
+    public GerenciadorDeTurnos gerenciadorDeTurnos;
     protected List<Jogador<TipoCarta>> quemJogouNaMesa = new ArrayList<>();
     protected ValidadorDeRegras<TipoCarta> regras;
     protected List<TipoCarta> mesa;
